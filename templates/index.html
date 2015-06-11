@@ -1,0 +1,88 @@
+{% extends "bootstrap/base.html" %}
+
+
+{% block styles %}
+	{{super()}}
+	<style>
+		body {
+			padding: 20px;
+		}
+	</style>
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3>Add new switch</h3>
+				</div>
+				<div class="panel-body">
+					<form action="/api/add" method="POST" class="form">
+						<div class="input-group">
+							<span class="input-group-addon">Name</span>
+							<input class="form-control" id="slug" name="slug" type="text" value="">
+							<span class="input-group-btn">
+								<input type="submit" value="Add" class="btn btn-default">
+							</span>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		{% for s in switches %}
+		<div class="col-md-4">
+			<div class="panel panel-success switch" id="{{s.id_}}">
+				<div class="panel-heading">
+					<h2>
+						{{s.slug}}
+						<a href="#" class="delete btn btn-danger" style="float: right;">X</a>
+					</h2>
+				</div>
+				<div class="panel-body">
+					<a href="#" class="flip" style="font-size: 100px; font-weight: bold;">{{s.value|lower}}</a>
+				</div>
+			</div>
+		</div>
+		{% else %}
+		<div class="col-lg-12">
+			No Switches
+		</div>
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+	{{super()}}
+	<script>
+	// For each switch box
+	$('.switch').each(function(){
+
+		// Add the toggle action, makes a call to flip and toggles the text
+		a = $(this).find('.panel-body a.flip');
+		a.click(function(event){
+			event.preventDefault();
+			panel = $(event.target).parents('div.panel.switch');
+			$.post('/api/flip/' + panel.attr('id'), function(data){
+				$(event.target).text(data.value);
+			});
+		});
+
+		// Add the delete funtionaly, calls delete then removes the box
+		del = $(this).find('.panel-heading a.delete');
+		del.click(function(event){
+			event.preventDefault();
+			panel = $(event.target).parents('div.panel.switch');
+			$.post('/api/delete/' + panel.attr('id'), function(data){
+				panel.remove();
+			})
+		})
+	});
+	</script>
+
+{% endblock %}
