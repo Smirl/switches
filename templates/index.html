@@ -7,6 +7,11 @@
 		body {
 			padding: 20px;
 		}
+		.box_transition {
+			-webkit-transition: all 0.3s ease-out; 
+			transition: all 0.3s ease-out; 
+		}		
+
 	</style>
 {% endblock %}
 
@@ -35,7 +40,7 @@
 	</div>
 	<div class="row">
 		{% for s in switches %}
-		<div class="col-md-4">
+		<div class="col-sm-6 col-md-4">
 			<div class="panel panel-success switch" id="{{s.id_}}">
 				<div class="panel-heading">
 					<h2>
@@ -46,6 +51,16 @@
 				<div class="panel-body">
 					<a href="#" class="flip" style="font-size: 100px; font-weight: bold;">{{s.value|lower}}</a>
 				</div>
+				<table class="table">
+					<tr>
+						<th>created</th>
+						<td>{{s.created.strftime("%Y-%m-%d %H:%M")}}</td>
+					</tr>
+					<tr>
+						<th>updated</th>
+						<td class="updated">{{s.updated.strftime("%Y-%m-%d %H:%M")}}</td>
+					</tr>
+				</table>
 			</div>
 		</div>
 		{% else %}
@@ -70,6 +85,7 @@
 			panel = $(event.target).parents('div.panel.switch');
 			$.post('/api/flip/' + panel.attr('id'), function(data){
 				$(event.target).text(data.value);
+				panel.find('td.updated').text(data.updated);
 			});
 		});
 
@@ -79,7 +95,7 @@
 			event.preventDefault();
 			panel = $(event.target).parents('div.panel.switch');
 			$.post('/api/delete/' + panel.attr('id'), function(data){
-				panel.remove();
+				panel.parent().remove();  // the col not the panel
 			})
 		})
 	});
