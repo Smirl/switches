@@ -57,6 +57,17 @@ class Switch(db.Model):
         db.session.add(self)
         db.session.commit()
 
+    @staticmethod
+    def on_changed_value(target, value, oldvalue, initiator):
+        """The function to call when the "value" changes."""
+        target.updated = datetime.utcnow()
+        db.session.add(target)
+        db.session.commit()
+
+
+# This is the event listener
+db.event.listen(Switch.value, 'set', Switch.on_changed_value)
+
 
 @app.route('/')
 def homepage():
@@ -97,6 +108,9 @@ def api_delete(id_):
     else:
         message = 'Did not find {}'.format(id_)
     return jsonify({'message': message})
+
+
+
 
 
 if __name__ == '__main__':
