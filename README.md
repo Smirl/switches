@@ -48,6 +48,8 @@ In production we should use something better like `gunicorn`. `gunicorn` will al
 
 Go to http://localhost:5000/ to see your hard work
 
+## Heroku
+This has been deployed to heroku and you can see the master branch at http://intense-depths-2389.herokuapp.com. The Procfile runs the gunicorn server with some logging. Heroku deployment uses postgresql not sqlite3. This is configured with the `DATABASE_URL` environment variable which is set in heroku. For development sqlite3 is fine and you do not need to install the `psycopg2` python package.
 
 ## How it works
 The switches.py file is the web server which has different "web pages". These are all of the functions which have `@app.route` on them. The `Switch` model is a database table basically. Your database is just the one file called `switches.sqlite3` which `create_all` made for you.
