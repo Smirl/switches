@@ -20,6 +20,7 @@ Now that we are activated in the virtualenv you should the name of it on your pr
 (venv)$ python --version
 (venv)$ pip --version
 (venv)$ pip install -r requirements-dev.txt
+```
 
 
 Create the database. This only needs to be done the once not everytime you run the app.
@@ -31,10 +32,16 @@ Create the database. This only needs to be done the once not everytime you run t
 >exit()
 ```
 
-Start up the server with the flask debug server. In production we should use something better like gunicorn. gunicorn will also be installed when you ran `pip install -r` so you can try that too.
+Start up the server with the flask debug server.
 
 ```sh
 (venv)$ python switches.py
+```
+
+In production we should use something better like `gunicorn`. `gunicorn` will also be installed when you ran `pip install -r` so you can try that too.
+
+```sh
+(venv)$ gunicorn switches:app --log-file - --log-level debug --port 5000
 ```
 
 Go to http://localhost:5000/ to see your hard work
