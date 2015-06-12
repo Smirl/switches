@@ -1,6 +1,8 @@
 # switches
 A web page of switches that don't do anything at all
 
+![switches-screenshot](https://cloud.githubusercontent.com/assets/5792870/8129223/d69ebed0-10fe-11e5-9827-de72edfd54b9.png)
+
 ## Installation and Running
 
 You will need a python installation and preferable a virtualenv to keep things separated from your system python. First you should get Pip, https://pip.pypa.io/en/latest/installing.html. Now lets set things up.
