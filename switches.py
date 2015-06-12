@@ -6,6 +6,8 @@ A simple flask app with a sqlite3 database backend.
 
 from datetime import datetime
 import os
+import logging
+import sys
 
 from flask import Flask, render_template, jsonify, request, redirect
 from flask.ext.bootstrap import Bootstrap
@@ -20,12 +22,13 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY') or 'ghjkl;IU3jnca;hFIAZ'
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///switches.sqlite'
+app.logger.addHandler(logging.StreamHandler(sys.stdout))
+app.logger.setLevel(logging.ERROR)
 
 bootstrap = Bootstrap()
 bootstrap.init_app(app)
 db = SQLAlchemy(app)
 db.init_app(app)
-db.create_all()
 
 
 class Switch(db.Model):
@@ -107,9 +110,6 @@ def api_delete(id_):
     else:
         message = 'Did not find {}'.format(id_)
     return jsonify({'message': message})
-
-
-
 
 
 if __name__ == '__main__':
