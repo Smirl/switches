@@ -1,1 +1,1 @@
-web: python switches.py
+web: gunicorn switches:app --log-file -
