@@ -19,8 +19,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY') or 'ghjkl;IU3jnca;hFIAZ'
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL') or \
-    'sqlite:///' + os.path.join(basedir, 'switches.sqlite')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///switches.sqlite'
 
 bootstrap = Bootstrap()
 bootstrap.init_app(app)
