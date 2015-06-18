@@ -1,5 +1,5 @@
 # switches
-A web page of switches that don't do anything at all
+A web page of switches that don't do anything at all [ ![Codeship Status for Smirl/teaflask](https://www.codeship.io/projects/2d362f80-f7bf-0132-941f-76fcd0eb4f4a/status)](https://www.codeship.io/projects/86425)
 
 ![switches-screenshot](https://cloud.githubusercontent.com/assets/5792870/8129223/d69ebed0-10fe-11e5-9827-de72edfd54b9.png)
 
