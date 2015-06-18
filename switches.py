@@ -16,11 +16,11 @@ from flask.ext.sqlalchemy import SQLAlchemy
 # We need to create app at module level so we have it, pretty nasty
 # proper way would be to make this whole app not in one file. That isn't as
 # fun though.
-basedir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY') or 'ghjkl;IU3jnca;hFIAZ'
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
+app.config['TESTING'] = os.environ.get('TESTING', False) == 'True'
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///switches.sqlite')
 app.logger.addHandler(logging.StreamHandler(sys.stdout))
 app.logger.setLevel(logging.ERROR)
