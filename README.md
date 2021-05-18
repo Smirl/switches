@@ -14,7 +14,7 @@ docker-compose up
 Create the database. This only needs to be done the once not everytime you run the app.
 
 ```console
-docker-compose exec app bash
+docker-compose exec app sh
 ```
 
 ```console
