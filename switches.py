@@ -10,8 +10,8 @@ import logging
 import sys
 
 from flask import Flask, render_template, jsonify, request, redirect
-from flask.ext.bootstrap import Bootstrap
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_bootstrap import Bootstrap
+from flask_sqlalchemy import SQLAlchemy
 
 # We need to create app at module level so we have it, pretty nasty
 # proper way would be to make this whole app not in one file. That isn't as
