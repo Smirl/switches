@@ -8,18 +8,19 @@ A web page of switches that don't do anything at all [ ![Codeship Status for Smi
 We can use docker to get a production like environment locally.
 
 ```console
-docker-compose up
+docker compose up
 ```
 
 Create the database. This only needs to be done the once not everytime you run the app.
 
 ```console
-docker-compose exec app sh
+docker compose exec app sh
 ```
 
 ```console
-from switches import db
-db.create_all()
+from switches import app, db
+with app.app_context():
+    db.create_all()
 exit()
 ```
 

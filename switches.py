@@ -4,12 +4,12 @@ Switches allows persistent boolean state to be displayed as a comical switch.
 A simple flask app with a sqlite3 database backend.
 """
 
-from datetime import datetime
-import os
 import logging
+import os
 import sys
+from datetime import datetime
 
-from flask import Flask, render_template, jsonify, request, redirect
+from flask import Flask, jsonify, redirect, render_template, request
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 
@@ -30,14 +30,11 @@ app.config["SQLALCHEMY_DATABASE_URI"] = app.config["SQLALCHEMY_DATABASE_URI"].re
 app.logger.addHandler(logging.StreamHandler(sys.stdout))
 app.logger.setLevel(logging.ERROR)
 
-bootstrap = Bootstrap()
-bootstrap.init_app(app)
+bootstrap = Bootstrap(app)
 db = SQLAlchemy(app)
-db.init_app(app)
 
 
 class Switch(db.Model):
-
     """The on off value in the database."""
 
     __tablename__ = "switches"

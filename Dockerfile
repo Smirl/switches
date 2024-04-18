@@ -1,4 +1,4 @@
-FROM python:3.9.5-alpine
+FROM python:3.11.9-alpine
 WORKDIR /src
 RUN apk --no-cache add build-base postgresql-dev gcc musl-dev
 COPY requirements.txt .
